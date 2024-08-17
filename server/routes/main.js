@@ -1,10 +1,16 @@
 import express from 'express'
 const router = express.Router();
 
-router.get('', (req, res) => {
-    const data = 'Dev'
-    res.render('index',{data});
+router.get('/', (req, res) => {
+    res.render('index');
 })
 
+router.get('/about', (req, res) => {
+    res.render('about');
+})
+
+router.get('/contact', (req, res) => {
+    res.render('contact');
+})
 
 export default router;
