@@ -8,6 +8,9 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+import {connectDB} from './server/config/db.js' 
+connectDB();
+
 app.use(express.static('public'));
 
 app.use(expressLayout);
