@@ -4,14 +4,20 @@ import Post from '../models/Post.js';
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-    const locals = 
-    {
-        title: "Building APIs with Node.js",
-        body: "Learn how to use Node.js to build RESTful APIs using frameworks like Express.js"
-    }
     try {
         const data = await Post.find()
-        res.render('index', { locals, data });
+        res.render('index', { data });
+    } catch (error) {
+        console.log(error);
+    }
+
+})
+
+router.get('/post/:id', async (req, res) => {
+    try {
+        let slug = req.params.id;
+        const data = await Post.findById({ _id: slug})
+        res.render('posts', { data });
     } catch (error) {
         console.log(error);
     }
