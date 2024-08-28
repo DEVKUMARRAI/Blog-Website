@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
 router.get('/post/:id', async (req, res) => {
     try {
         let slug = req.params.id;
-        const data = await Post.findById({ _id: slug})
+        const data = await Post.findById({ _id: slug })
         res.render('posts', { data });
     } catch (error) {
         console.log(error);
@@ -30,6 +30,24 @@ router.get('/about', (req, res) => {
 
 router.get('/contact', (req, res) => {
     res.render('contact');
+})
+
+router.post('/search', async (req, res) => {
+    try {
+        let searchTerm = req.body.searchTerm;
+        const searchNoSpecialCharac = searchTerm.replace(/[^a-zA-Z0-9]/g, "")
+
+        const data = await Post.find({
+            $or: [
+                { title: { $regex: new RegExp(searchNoSpecialCharac, 'i') } },
+                { body: { $regex: new RegExp(searchNoSpecialCharac, 'i') } }
+            ]
+        })
+        res.render("search", { data });
+    } catch (error) {
+        console.log(error);
+    }
+
 })
 
 

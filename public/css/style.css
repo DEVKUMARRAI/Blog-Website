@@ -299,7 +299,7 @@ textarea {
   
   /* SeachBar */
   .searchBar {
-    visibility: hidden;
+    display: block;
     transform: translateY(-100px);
     background-color: var(--black);
     padding: 4px 0;
